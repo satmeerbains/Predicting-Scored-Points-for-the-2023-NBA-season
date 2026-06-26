@@ -8,23 +8,26 @@ Predicting the points scored for each player in the NBA is very important in bas
     <span>By employing these regression models, we aim to understand how they perform in predicting basketball points and compare their respective predictive capabilities. Through this analysis, we can gain valuable insights into the strengths and weaknesses of each model and identify the most suitable model for predicting basketball points in this specific dataset.</span>
     <br>
     <br>
-    
-    
+
 <h3> Table of Contents </h3>
 <ul style="list-style-type: none; padding-left: 0;">
-    <span style="margin-left: -10px;">&#8226;</span> 1. Import libraries</li>
-    <span style="margin-left: -10px;">&#8226;</span> 2. Data Exploration</li>
-    <span style="margin-left: -10px;">&#8226;</span> 3. Data Visualization</li>
-    <span style="margin-left: -10px;">&#8226;</span> 4. Features Selection</li>
-        <span style="margin-left: -10px;">&#8226;</span> 5. Modeling:
+    1. Import libraries</li> <br>
+    2. Data Exploration</li> <br>
+    3. Data Visualization</li> <br>
+    4. Features Selection</li> <br>
+    5. Modeling:
         <ul style="list-style-type: none; padding-left: 20px;">
-            <li><span style="margin-left: -10px;">&#8226;</span> Linear Regression</li>
-            <li><span style="margin-left: -10px;">&#8226;</span> KNeighbors Regressor</li>
-            <li><span style="margin-left: -10px;">&#8226;</span> Decision Tree Regressor</li>
-            <li><span style="margin-left: -10px;">&#8226;</span> Random Forest Regressor</li>
+            <span style="margin-left: -10px;">&#8226;</span> Linear Regression</li> <br>
+            <span style="margin-left: -10px;">&#8226;</span> KNeighbors Regressor</li> <br>
+            <span style="margin-left: -10px;">&#8226;</span> Decision Tree Regressor</li> <br>
+            <span style="margin-left: -10px;">&#8226;</span> Random Forest Regressor</li> <br>
         </ul>
     </li>
-    <li><span style="margin-left: -10px;">&#8226;</span> 6. Results</li>
+    6. Results</li>
 </ul>
-</div>
 
+    
+<h3> Dataset </h3>
+The data used was player data from the National Basketball Association from the 2022-2023 season. 
+
+## 1. Importing Libraries
