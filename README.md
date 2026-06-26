@@ -31,3 +31,20 @@ Predicting the points scored for each player in the NBA is very important in bas
 The data used was player data from the National Basketball Association from the 2022-2023 season. 
 
 ## 1. Importing Libraries
+Libraries used in this notebook inlcude pandas, numpy, plotly, sklearn, and seaborn
+
+## 2. Data Exploration
+The following is a snapshot of the original dataframe
+<img width="2674" height="656" alt="image" src="https://github.com/user-attachments/assets/6fbfc74d-edac-4846-8467-94f4b6eda9ae" />
+
+Updates made:
+ <ul style="list-style-type: none; padding-left: 20px;">
+            <span style="margin-left: -10px;">&#8226;</span> Columns were renamed due to the ambiguity of the naming convention in the original dataframe</li> <br>
+            <span style="margin-left: -10px;">&#8226;</span> The 'Position' feature had missing values. Based on research all 5 players that have this missing value are shooting guards the null values were updated to be 'SG'
+        </ul>
+    </li>
+
+The following shows the data description 
+<img width="2548" height="526" alt="image" src="https://github.com/user-attachments/assets/6f3330ee-368b-4082-aa44-d901b94d9d52" />
+
+## 2. Data Visualization
