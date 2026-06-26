@@ -13,10 +13,9 @@ Predicting the points scored for each player in the NBA is very important in bas
 <h3> Table of Contents </h3>
 <ul style="list-style-type: none; padding-left: 0;">
     <span style="margin-left: -10px;">&#8226;</span> 1. Import libraries</li>
-    <li><span style="margin-left: -10px;">&#8226;</span> 2. Data Exploration</li>
-    <li><span style="margin-left: -10px;">&#8226;</span> 3. Data Visualization</li>
-    <li><span style="margin-left: -10px;">&#8226;</span> 4. Features Selection</li>
-    <li>
+    <span style="margin-left: -10px;">&#8226;</span> 2. Data Exploration</li>
+    <span style="margin-left: -10px;">&#8226;</span> 3. Data Visualization</li>
+    <span style="margin-left: -10px;">&#8226;</span> 4. Features Selection</li>
         <span style="margin-left: -10px;">&#8226;</span> 5. Modeling:
         <ul style="list-style-type: none; padding-left: 20px;">
             <li><span style="margin-left: -10px;">&#8226;</span> Linear Regression</li>
