@@ -102,7 +102,7 @@ Four regression algorithms were evaluated to predict total points scored: Linear
 
 **Random Forest Regressor** was tuned over the number of estimators (80–160) and maximum tree depth (1–19). The best configuration achieved a cross-validated R² of 0.947 on a 10% test split, with the final model evaluated at an R² of 0.977 — the strongest result among all four approaches. As an ensemble of decision trees, Random Forest benefits from variance reduction through bagging, which appears to translate into a meaningful improvement over the single-tree approach.
 markdown## Results
-
+## 6. Results
 | Model | R² Score |
 |---|---|
 | Linear Regression | 0.973 |
@@ -114,4 +114,15 @@ Across all four models, total points scored proved to be highly predictable from
 
 Diagnostic plots comparing actual versus predicted points for the final Random Forest model — including a scatter plot, an overlaid distribution histogram, a residual plot, and a predicted-vs-true line plot — confirmed that predictions tracked closely with actual values across the full scoring range, with residuals distributed roughly symmetrically around zero and no strong evidence of systematic bias at either the low or high end of the scoring spectrum.
 
-**Conclusion:** Random Forest Regression was selected as the final model, offering the best balance of predictive accuracy and robustness to overfitting, with an R² of 0.977 on the test set.
+## Conclusion:
+
+Random Forest Regression was selected as the final model, offering the best balance of predictive accuracy and robustness to overfitting, with an R² of 0.977 on the test set. This result reinforces a broader theme in the analysis: total points scored is overwhelmingly driven by playing time and shot volume, both of which were retained as features after the multicollinearity-based feature selection step. Because these inputs are themselves largely a function of coaching decisions and game context rather than independent skill signals, the model is best understood as a strong descriptive fit to *how* points accumulate over a season, rather than a predictive tool for forecasting a player's output ahead of time.
+
+A few limitations are worth noting. The dataset reflects a single season (2023), so the model has not been validated on out-of-season or future data, and its performance may not generalize to rookies, players with limited minutes, or seasons with significant rule or pace changes. The high R² scores across all models, including the simple Linear Regression baseline, also suggest that the problem itself is close to linearly separable given the chosen features — meaning the choice of model matters less here than the choice of features, and the marginal gains from Random Forest may not justify its added complexity in lower-stakes use cases.
+
+Potential directions for future work include:
+- Validating the model on multiple seasons to test generalizability across years
+- Engineering additional features, such as usage rate or pace-adjusted metrics, that more directly capture playing style rather than accumulated totals
+- Testing gradient boosting methods (e.g. XGBoost, LightGBM) to see whether they outperform Random Forest on this feature set
+- Reframing the task as predicting points *per minute* or *per possession*, which would isolate scoring efficiency from playing time and likely present a more challenging, and arguably more useful, prediction problem
+Want me to assemble everything we've written so far into the full README file now?
