@@ -58,7 +58,8 @@ Updates made:
 The following shows the data description 
 <img width="2548" height="526" alt="image" src="https://github.com/user-attachments/assets/6f3330ee-368b-4082-aa44-d901b94d9d52" />
 
-## 2. Data Visualization
+## 3. Data Visualization
+The following are visualizations generated based on the dataset.
 <img width="1342" height="450" alt="image" src="https://github.com/user-attachments/assets/db846a85-aee7-4592-ab80-0d2fac5ab1c3" />
 <img width="1342" height="450" alt="newplot (2)" src="https://github.com/user-attachments/assets/56e4224b-2eed-4aa2-b066-51d641bddb12" />
 <img width="1342" height="450" alt="newplot (1)" src="https://github.com/user-attachments/assets/31f9fc0d-4bed-455d-b720-6df5e4685b27" />
@@ -80,3 +81,37 @@ The following shows the data description
 <img width="1000" height="800" alt="newplot (2)" src="https://github.com/user-attachments/assets/4584feec-e06f-4789-98c4-2dfb04f5a44f" />
 
 
+## 4. Feature Selection
+To reduce noise and prevent multicollinearity from distorting the regression models, two preprocessing steps were applied prior to training.
+
+First, rows with implausible or invalid shooting statistics were removed: field goal percentage greater than 90% or equal to 0%, three-point percentage greater than 90% or equal to 0%, and free throw percentage equal to 0%. These thresholds were chosen because such values almost always result from extremely low attempt counts rather than genuine shooting performance, and including them would distort the relationship between shooting efficiency and scoring output.
+
+Second, a set of features was dropped based on the correlation heatmap generated during exploratory analysis. Identifying columns, including `Player_Name`, `Position`, and `Team_Abbreviation`, were excluded since they carry no predictive signal in their raw form. Additionally, several stat pairs that are mathematically or practically redundant — such as `Field_Goals_Made`/`Field_Goals_Attempted`, the three-point shooting columns, and offensive/defensive rebound splits — were removed to mitigate multicollinearity, which can inflate coefficient variance in linear models and obscure feature importance in tree-based models.
+
+The resulting dataset was split into training and test sets using an 80/20 ratio with a fixed random state of 42 to ensure reproducibility, with `Total_Points` defined as the target variable.
+
+## 5. Modeling
+
+Four regression algorithms were evaluated to predict total points scored: Linear Regression, K-Nearest Neighbors, Decision Tree, and Random Forest. For each model, a grid search over train/test split ratios and random states was first conducted to identify a favorable data partition, followed by targeted hyperparameter tuning via `GridSearchCV` with 5-fold cross-validation.
+
+**Linear Regression** served as the baseline model. A sweep across test sizes (15–30%) and six random states identified a 20% test split with `random_state=43` as optimal, yielding an R² of 0.973 on the held-out test set. The strength of this result suggests that the relationship between the selected features (particularly minutes played, shooting volume, and efficiency metrics) and total points is largely linear in nature.
+
+**K-Nearest Neighbors** was tuned over the number of neighbors, distance weighting scheme, and distance metric (Manhattan vs. Euclidean). The best configuration (`n_neighbors=7`, `weights='distance'`, `p=1`) achieved a cross-validated R² of 0.907, with a test set R² of 0.921. The comparatively lower performance suggests that KNN's reliance on local neighborhood structure is less effective here than the global patterns captured by linear and ensemble methods.
+
+**Decision Tree Regressor** was tuned across maximum depth, minimum samples per split, and minimum samples per leaf to control overfitting. The best parameters achieved a cross-validated R² of approximately 0.947, with the final model — evaluated using an independent test split tuning pass — reaching an R² of 0.971 on a 10% holdout set.
+
+**Random Forest Regressor** was tuned over the number of estimators (80–160) and maximum tree depth (1–19). The best configuration achieved a cross-validated R² of 0.947 on a 10% test split, with the final model evaluated at an R² of 0.977 — the strongest result among all four approaches. As an ensemble of decision trees, Random Forest benefits from variance reduction through bagging, which appears to translate into a meaningful improvement over the single-tree approach.
+markdown## Results
+
+| Model | R² Score |
+|---|---|
+| Linear Regression | 0.973 |
+| K-Nearest Neighbors | 0.921 |
+| Decision Tree | 0.955 |
+| **Random Forest** | **0.977** |
+
+Across all four models, total points scored proved to be highly predictable from the selected feature set, with every approach exceeding an R² of 0.90. Linear Regression's strong performance (0.973) indicates that the underlying relationship between playing time, shot volume, and scoring is close to linear once outliers and redundant features are removed. Random Forest improved marginally on this baseline (0.977), benefiting from its capacity to model non-linear interactions and feature dependencies that a purely linear model cannot capture, while Decision Tree (0.955) and KNN (0.921) trailed behind — the former due to higher variance from relying on a single tree structure, and the latter due to its sensitivity to local feature-space density rather than global trends.
+
+Diagnostic plots comparing actual versus predicted points for the final Random Forest model — including a scatter plot, an overlaid distribution histogram, a residual plot, and a predicted-vs-true line plot — confirmed that predictions tracked closely with actual values across the full scoring range, with residuals distributed roughly symmetrically around zero and no strong evidence of systematic bias at either the low or high end of the scoring spectrum.
+
+**Conclusion:** Random Forest Regression was selected as the final model, offering the best balance of predictive accuracy and robustness to overfitting, with an R² of 0.977 on the test set.
