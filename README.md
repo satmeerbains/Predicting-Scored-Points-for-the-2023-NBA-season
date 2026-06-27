@@ -1,13 +1,6 @@
 # 🏀 Predicting Scored Points for the 2023 NBA season🏀 
-Predicting the points scored for each player in the NBA is very important in basketball analytics. It is a crucial performance metric that allows coaches and analysts to assess a player's scoring ability and overall offensive impact to the team. Understanding a players scoring potential aids in strategic decision-making during games, player selection, and talent scouting. In this notebook, we will employ various machine learning techniques to predict players' point contributions using data from the 2023 season.</span>
-    <br>
-    <br>
-    <span>The machine learning techniques used to predict basketball points are: Linear Regression, K-Nearest Neighbors (KNN) Regressor, Decision Tree Regressor (DT), and Random Forest Regressor (RFR). Each model is utilized to predict players' total points based on various performance metrics, such as minutes played, field goals made, free throws made, assists, steals, blocks, and other relevant statistics.</span>
-    <br>
-    <br>
-    <span>By employing these regression models, we aim to understand how they perform in predicting basketball points and compare their respective predictive capabilities. Through this analysis, we can gain valuable insights into the strengths and weaknesses of each model and identify the most suitable model for predicting basketball points in this specific dataset.</span>
-    <br>
-    <br>
+## Overview
+Predicting the points scored for each player in the NBA is very important in basketball analytics. It is a crucial performance metric that allows coaches and analysts to assess a player's scoring ability and overall offensive impact to the team. Understanding a players scoring potential aids in strategic decision-making during games, player selection, and talent scouting. In this notebook, we will employ various machine learning techniques to predict players' point contributions using data from the 2023 season.
 
 <h3> Table of Contents </h3>
 <ul style="list-style-type: none; padding-left: 0;">
@@ -25,6 +18,15 @@ Predicting the points scored for each player in the NBA is very important in bas
     </li>
     6. Results</li>
 </ul>
+</span>
+    <span>The machine learning techniques used to predict basketball points are: Linear Regression, K-Nearest Neighbors (KNN) Regressor, Decision Tree Regressor (DT), and Random Forest Regressor (RFR). Each model is utilized to predict players' total points based on various performance metrics, such as minutes played, field goals made, free throws made, assists, steals, blocks, and other relevant statistics.</span>
+    <br>
+    <br>
+    <span>By employing these regression models, we aim to understand how they perform in predicting basketball points and compare their respective predictive capabilities. Through this analysis, we can gain valuable insights into the strengths and weaknesses of each model and identify the most suitable model for predicting basketball points in this specific dataset.</span>
+    <br>
+    <br>
+
+**Tech stack:** Python, pandas, numpy, scikit-learn, matplotlib, seaborn, plotly
 
     
 <h3> Dataset </h3>
@@ -34,6 +36,15 @@ The data used was player data from the National Basketball Association from the 
 Libraries used in this notebook inlcude pandas, numpy, plotly, sklearn, and seaborn
 
 ## 2. Data Exploration
+The dataset is loaded from `2023_nba_player_stats.csv` and contains per-player season stats for the 2023 NBA season.
+
+**Steps:**
+- Checked dataset shape and duplicate rows
+- Renamed columns to clearer, more descriptive names (e.g. `PTS` → `Total_Points`, `GP` → `Games_Played`)
+- Reviewed data types and summary statistics (`df.info()`, `df.describe()`)
+- Checked for missing values
+- Found 5 missing values in the `Position` column — all identified as shooting guards based on research, and filled with `'SG'`
+- 
 The following is a snapshot of the original dataframe
 <img width="2674" height="656" alt="image" src="https://github.com/user-attachments/assets/6fbfc74d-edac-4846-8467-94f4b6eda9ae" />
 
@@ -67,4 +78,5 @@ The following shows the data description
 <img width="1342" height="450" alt="newplot (1)" src="https://github.com/user-attachments/assets/f268a879-8eb7-46ca-a128-439ced8b6f6a" />
 <img width="1342" height="450" alt="newplot" src="https://github.com/user-attachments/assets/ea800dbd-83b8-4123-915b-526b148a174c" />
 <img width="1000" height="800" alt="newplot (2)" src="https://github.com/user-attachments/assets/4584feec-e06f-4789-98c4-2dfb04f5a44f" />
+
 
